@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json
+{
+	"name": "DevContainerImage",
+	"build": {
+		"dockerfile": "../Dockerfile"
+	},
+	"containerUser": "dev-container",
+	"mounts": [
+		"src=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+		"src=${localEnv:HOME}/.aws,dst=/home/dev-container/.aws,type=bind",
+		"src=${localEnv:HOME}/.ssh,dst=/home/dev-container/.ssh,type=bind",
+		"src=${localEnv:HOME}/.gitconfig,dst=/home/dev-container/.gitconfig,type=bind",
+		"src=${localEnv:HOME}/.zsh_history,dst=/home/dev-container/.zsh_history,type=bind",
+		"src=${localEnv:HOME}/.bash_history,dst=/home/dev-container/.bash_history,type=bind",
+		"src=${localEnv:HOME}/Projects/alpha-neuron/.devcontainer/,dst=${localEnv:HOME}/Projects/alpha-neuron/.devcontainer/,type=bind"
+	],
+	"onCreateCommand": "${localEnv:HOME}/Projects/alpha-neuron/.devcontainer/scripts/on_create.sh ${localEnv:HOME}/Projects/alpha-neuron/.devcontainer/scripts",
+	"containerEnv": {
+		"AWS_REGION": "ap-southeast-2",
+		"AWS_PROFILE": "mantel-sandpit1"
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"extensions.verifySignature": false,
+				"terminal.integrated.defaultProfile.linux": "zsh",
+        		"terminal.integrated.profiles.linux": {
+					"zsh": {
+						"path": "zsh"
+					}
+				}
+			},
+			"extensions": [
+				"amazonwebservices.aws-toolkit-vscode",
+				"dbaeumer.vscode-eslint",
+				"charliermarsh.ruff",
+				"esbenp.prettier-vscode",
+				"matangover.mypy",
+                "mechatroner.rainbow-csv",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+                "ms-python.black-formatter",
+                "ms-toolsai.jupyter",
+				"ms-vscode.makefile-tools",
+				"mutantdino.resourcemonitor",
+				"tamasfe.even-better-toml",
+				"tuxtina.json2yaml",
+				"goessner.mdmath"		
+			]
+		}
+	}
+}

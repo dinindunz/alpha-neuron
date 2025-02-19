@@ -1,7 +1,6 @@
 .aider*
 .env
 .venv
-.devcontainer
 .DS_Store
 
 *.zip
