@@ -1,0 +1,6 @@
+project_id: "your-gcp-project-id"
+region: "us-central1"
+bucket_name: "your-gcs-bucket-name"
+pipeline_name: "churn-prediction-pipeline"
+model_name: "customer_churn_model"
+api_endpoint: "https://your-api-endpoint"

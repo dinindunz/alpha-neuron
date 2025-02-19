@@ -1,0 +1,32 @@
+steps:
+  # Step 1: Run tests
+  - name: python:3.11
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        pip install pytest
+        pytest test_pipeline.py
+
+  # Step 2: Train the model
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - bash
+      - -c
+      - |
+        python pipeline.py
+
+  # Step 3: Deploy to Vertex AI
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - bash
+      - -c
+      - |
+        python deploy.py
+
+# Define substitutions
+substitutions:
+  _REGION: "australia-southeast1"
+  _PROJECT_ID: "935945755869"
+
+timeout: 1200s

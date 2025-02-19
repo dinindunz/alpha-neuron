@@ -1,0 +1,12 @@
+commercial software development experience across different industries and organisations
+commercial experience of machine learning application development
+production experience in at least one cloud stack
+consulting experience, either with external clients or internally within an organisation
+fundamental modern software engineering skills (can design and implement a well structured code base and software development cycle, including CI/CD, TDD, monitoring/logging)
+solid programming skills in at least one applicable language, such as Python
+cloud engineering skills to architect, use and deploy cloud services in at least one cloud stack
+an understanding of key machine learning and data science concepts across different areas
+good grasp of concepts in machine learning development cycle & MLOps, such as model development, model deployment, data versioning etc.
+evidence of ML project delivery or self learning that can be demonstrated 
+exposure to one or more ML technologies and/or frameworks such as Amazon Sagemaker, Google AI Platform, Databricks / mlfow, AI API Services, and/or TensorFlow, Pytorch, Scikit-Learn etc, with demonstrable production experience
+ability to search and evaluate the best tool for a range of different technical problems

@@ -1,0 +1,7 @@
+ipykernel
+tensorflow
+tensorflow_decision_forests
+pandas
+numpy
+seaborn
+matplotlib

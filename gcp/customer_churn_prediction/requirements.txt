@@ -1,0 +1,4 @@
+ipykernel
+tensorflow
+pandas
+numpy

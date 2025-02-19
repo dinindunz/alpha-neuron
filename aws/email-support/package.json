@@ -1,0 +1,35 @@
+{
+  "name": "email-support",
+  "version": "0.1.0",
+  "bin": {
+    "mug-support": "bin/email-support.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.7.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "aws-cdk": "2.158.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.3",
+    "@project-lakechain/bedrock-text-processors": "^0.10.0",
+    "@project-lakechain/core": "^0.10.0",
+    "@project-lakechain/email-text-processor": "^0.10.0",
+    "@project-lakechain/opensearch-domain": "^0.10.0",
+    "@project-lakechain/pandoc-text-converter": "^0.10.0",
+    "@project-lakechain/pdf-text-converter": "^0.10.0",
+    "@project-lakechain/recursive-character-text-splitter": "^0.10.0",
+    "@project-lakechain/s3-event-trigger": "^0.10.0",
+    "@project-lakechain/sqs-storage-connector": "^0.10.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.158.0",
+    "constructs": "^10.0.0"
+  }
+}
