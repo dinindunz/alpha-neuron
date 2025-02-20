@@ -7,3 +7,5 @@
 
 .databricks
 spark-warehouse
+metastore_db
+derby.log
