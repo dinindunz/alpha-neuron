@@ -46,3 +46,6 @@ sudo dpkg -i lm-studio-*.deb
 chmod +x LM-Studio-0.3.9-6-x64.AppImage
 sudo apt install libfuse2 -y
 ./LM-Studio-0.3.9-6-x64.AppImage --no-sandbox
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
