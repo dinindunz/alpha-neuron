@@ -1,0 +1,883 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.565
+Let's talk about
+logistic regression,
+
+2
+00:00:02.565 --> 00:00:04.500
+which is probably
+the single most
+
+3
+00:00:04.500 --> 00:00:07.125
+widely used classification
+algorithm in the world.
+
+4
+00:00:07.125 --> 00:00:10.125
+This is something that I use
+all the time in my work.
+
+5
+00:00:10.125 --> 00:00:12.390
+Let's continue with
+the example of
+
+6
+00:00:12.390 --> 00:00:15.765
+classifying whether a
+tumor is malignant.
+
+7
+00:00:15.765 --> 00:00:19.030
+Whereas before we're going
+to use the label 1 or
+
+8
+00:00:19.030 --> 00:00:22.540
+yes to the positive class to
+represent malignant tumors,
+
+9
+00:00:22.540 --> 00:00:25.710
+and zero or no and
+negative examples
+
+10
+00:00:25.710 --> 00:00:27.735
+to represent benign tumors.
+
+11
+00:00:27.735 --> 00:00:29.760
+Here's a graph of
+the dataset where
+
+12
+00:00:29.760 --> 00:00:31.500
+the horizontal axis is
+
+13
+00:00:31.500 --> 00:00:33.780
+the tumor size and
+
+14
+00:00:33.780 --> 00:00:37.520
+the vertical axis takes on
+only values of 0 and 1,
+
+15
+00:00:37.520 --> 00:00:40.355
+because is a
+classification problem.
+
+16
+00:00:40.355 --> 00:00:42.680
+You saw in the last video that
+
+17
+00:00:42.680 --> 00:00:43.940
+linear regression is not
+
+18
+00:00:43.940 --> 00:00:45.980
+a good algorithm
+for this problem.
+
+19
+00:00:45.980 --> 00:00:50.270
+In contrast, what logistic
+regression we end
+
+20
+00:00:50.270 --> 00:00:54.805
+up doing is fit a curve
+that looks like this,
+
+21
+00:00:54.805 --> 00:00:58.950
+S-shaped curve to this dataset.
+
+22
+00:00:58.950 --> 00:01:01.790
+For this example, if a patient
+
+23
+00:01:01.790 --> 00:01:04.670
+comes in with a
+tumor of this size,
+
+24
+00:01:04.670 --> 00:01:07.219
+which I'm showing on the x-axis,
+
+25
+00:01:07.219 --> 00:01:11.095
+then the algorithm
+will output 0.7
+
+26
+00:01:11.095 --> 00:01:13.910
+suggesting that is
+closer or maybe more
+
+27
+00:01:13.910 --> 00:01:16.900
+likely to be
+malignant and benign.
+
+28
+00:01:16.900 --> 00:01:18.840
+Will say more later what
+
+29
+00:01:18.840 --> 00:01:22.155
+0.7 actually means
+in this context.
+
+30
+00:01:22.155 --> 00:01:28.915
+But the output label y is
+never 0.7 is only ever 0 or 1.
+
+31
+00:01:28.915 --> 00:01:32.015
+To build out to the logistic
+regression algorithm,
+
+32
+00:01:32.015 --> 00:01:34.850
+there's an important
+mathematical function I like to
+
+33
+00:01:34.850 --> 00:01:38.510
+describe which is called
+the Sigmoid function,
+
+34
+00:01:38.510 --> 00:01:42.895
+sometimes also referred to
+as the logistic function.
+
+35
+00:01:42.895 --> 00:01:46.250
+The Sigmoid function
+looks like this.
+
+36
+00:01:46.250 --> 00:01:48.905
+Notice that the x-axis of
+
+37
+00:01:48.905 --> 00:01:51.685
+the graph on the left
+and right are different.
+
+38
+00:01:51.685 --> 00:01:56.405
+In the graph to the left on
+the x-axis is the tumor size,
+
+39
+00:01:56.405 --> 00:01:58.390
+so is all positive numbers.
+
+40
+00:01:58.390 --> 00:02:00.290
+Whereas in the
+graph on the right,
+
+41
+00:02:00.290 --> 00:02:02.495
+you have 0 down here,
+
+42
+00:02:02.495 --> 00:02:06.110
+and the horizontal axis takes
+
+43
+00:02:06.110 --> 00:02:09.650
+on both negative and
+positive values and have
+
+44
+00:02:09.650 --> 00:02:13.130
+label the horizontal
+axis Z. I'm showing
+
+45
+00:02:13.130 --> 00:02:17.600
+here just a range of
+negative 3 to plus 3.
+
+46
+00:02:17.600 --> 00:02:22.190
+So the Sigmoid function outputs
+value is between 0 and 1.
+
+47
+00:02:22.190 --> 00:02:26.075
+If I use g of z to
+denote this function,
+
+48
+00:02:26.075 --> 00:02:29.210
+then the formula
+of g of z is equal
+
+49
+00:02:29.210 --> 00:02:33.995
+to 1 over 1 plus e
+to the negative z.
+
+50
+00:02:33.995 --> 00:02:36.650
+Where here e is a mathematical
+
+51
+00:02:36.650 --> 00:02:40.195
+constant that takes on
+a value of about 2.7,
+
+52
+00:02:40.195 --> 00:02:42.590
+and so e to the
+negative z is that
+
+53
+00:02:42.590 --> 00:02:46.000
+mathematical constant to
+the power of negative z.
+
+54
+00:02:46.000 --> 00:02:50.705
+Notice if z where
+really be, say a 100,
+
+55
+00:02:50.705 --> 00:02:53.690
+e to the negative z is e to the
+
+56
+00:02:53.690 --> 00:02:57.565
+negative 100 which
+is a tiny number.
+
+57
+00:02:57.565 --> 00:03:00.090
+So this ends up being 1
+
+58
+00:03:00.090 --> 00:03:03.555
+over 1 plus a tiny
+little number,
+
+59
+00:03:03.555 --> 00:03:08.330
+and so the denominator will
+be basically very close to 1.
+
+60
+00:03:08.330 --> 00:03:11.300
+Which is why when z is large,
+
+61
+00:03:11.300 --> 00:03:14.090
+g of z that is a
+Sigmoid function
+
+62
+00:03:14.090 --> 00:03:17.680
+of z is going to be
+very close to 1.
+
+63
+00:03:17.680 --> 00:03:21.470
+Conversely, you can
+also check for yourself
+
+64
+00:03:21.470 --> 00:03:25.595
+that when z is a very
+large negative number,
+
+65
+00:03:25.595 --> 00:03:30.530
+then g of z becomes 1
+over a giant number,
+
+66
+00:03:30.530 --> 00:03:35.110
+which is why g of z
+is very close to 0.
+
+67
+00:03:35.110 --> 00:03:37.520
+That's why the
+sigmoid function has
+
+68
+00:03:37.520 --> 00:03:40.250
+this shape where it
+starts very close to
+
+69
+00:03:40.250 --> 00:03:46.285
+zero and slowly builds up or
+grows to the value of one.
+
+70
+00:03:46.285 --> 00:03:51.830
+Also, in the Sigmoid function
+when z is equal to 0,
+
+71
+00:03:51.830 --> 00:03:54.410
+then e to the negative z is
+
+72
+00:03:54.410 --> 00:03:57.230
+e to the negative 0
+which is equal to 1,
+
+73
+00:03:57.230 --> 00:04:05.445
+and so g of z is equal to 1
+over 1 plus 1 which is 0.5,
+
+74
+00:04:05.445 --> 00:04:10.435
+so that's why it passes
+the vertical axis at 0.5.
+
+75
+00:04:10.435 --> 00:04:13.180
+Now, let's use this to build up
+
+76
+00:04:13.180 --> 00:04:15.595
+to the logistic
+regression algorithm.
+
+77
+00:04:15.595 --> 00:04:18.405
+We're going to do
+this in two steps.
+
+78
+00:04:18.405 --> 00:04:20.350
+In the first step, I hope you
+
+79
+00:04:20.350 --> 00:04:23.050
+remember that a
+straight line function,
+
+80
+00:04:23.050 --> 00:04:26.170
+like a linear regression
+function can be defined
+
+81
+00:04:26.170 --> 00:04:31.205
+as w. product of x plus b.
+
+82
+00:04:31.205 --> 00:04:34.485
+Let's store this value in
+
+83
+00:04:34.485 --> 00:04:37.650
+a variable which I'm
+going to call z,
+
+84
+00:04:37.650 --> 00:04:39.760
+and this will turn
+out to be the same z
+
+85
+00:04:39.760 --> 00:04:41.950
+as the one you saw on
+the previous slide,
+
+86
+00:04:41.950 --> 00:04:43.535
+but we'll get to
+that in a minute.
+
+87
+00:04:43.535 --> 00:04:47.410
+The next step then is
+to take this value of
+
+88
+00:04:47.410 --> 00:04:51.370
+z and pass it to the
+Sigmoid function,
+
+89
+00:04:51.370 --> 00:04:53.800
+also called the
+logistic function,
+
+90
+00:04:53.800 --> 00:04:56.860
+g. Now, g of
+
+91
+00:04:56.860 --> 00:05:02.065
+z then outputs a value
+computed by this formula,
+
+92
+00:05:02.065 --> 00:05:04.285
+1 over 1 plus e to
+the negative z.
+
+93
+00:05:04.285 --> 00:05:07.580
+There's going to be
+between 0 and 1.
+
+94
+00:05:07.580 --> 00:05:12.360
+When you take these two
+equations and put them together,
+
+95
+00:05:12.360 --> 00:05:17.635
+they then give you the logistic
+regression model f of x,
+
+96
+00:05:17.635 --> 00:05:23.290
+which is equal to
+g of wx plus b.
+
+97
+00:05:23.290 --> 00:05:27.430
+Or equivalently g of z,
+
+98
+00:05:27.430 --> 00:05:32.330
+which is equal to this
+formula over here.
+
+99
+00:05:32.330 --> 00:05:36.240
+This is the logistic
+regression model,
+
+100
+00:05:36.240 --> 00:05:40.240
+and what it does is it
+inputs feature or set
+
+101
+00:05:40.240 --> 00:05:44.570
+of features X and outputs
+a number between 0 and 1.
+
+102
+00:05:44.570 --> 00:05:47.050
+Next, let's take
+a look at how to
+
+103
+00:05:47.050 --> 00:05:50.680
+interpret the output of
+logistic regression.
+
+104
+00:05:50.680 --> 00:05:54.710
+We'll return to the tumor
+classification example.
+
+105
+00:05:54.710 --> 00:05:57.700
+The way I encourage
+you to think of
+
+106
+00:05:57.700 --> 00:06:00.250
+logistic regressions
+output is to think
+
+107
+00:06:00.250 --> 00:06:01.630
+of it as outputting
+
+108
+00:06:01.630 --> 00:06:04.930
+the probability that
+the class or the label
+
+109
+00:06:04.930 --> 00:06:10.695
+y will be equal to 1
+given a certain input x.
+
+110
+00:06:10.695 --> 00:06:14.620
+For example, in
+this application,
+
+111
+00:06:14.620 --> 00:06:18.320
+where x is the tumor size
+and y is either 0 or 1,
+
+112
+00:06:18.320 --> 00:06:20.585
+if you have a patient come in
+
+113
+00:06:20.585 --> 00:06:23.570
+and she has a tumor
+of a certain size x,
+
+114
+00:06:23.570 --> 00:06:26.570
+and if based on this input x,
+
+115
+00:06:26.570 --> 00:06:29.705
+the model I'll plus 0.7,
+
+116
+00:06:29.705 --> 00:06:32.210
+then what that means
+is that the model is
+
+117
+00:06:32.210 --> 00:06:35.210
+predicting or the
+model thinks there's
+
+118
+00:06:35.210 --> 00:06:37.760
+a 70 percent chance
+that the true label
+
+119
+00:06:37.760 --> 00:06:40.855
+y would be equal to
+1 for this patient.
+
+120
+00:06:40.855 --> 00:06:43.070
+In other words, the
+model is telling
+
+121
+00:06:43.070 --> 00:06:45.605
+us that it thinks
+the patient has
+
+122
+00:06:45.605 --> 00:06:47.660
+a 70 percent chance of
+
+123
+00:06:47.660 --> 00:06:50.765
+the tumor turning
+out to be malignant.
+
+124
+00:06:50.765 --> 00:06:53.525
+Now, let me ask you a question.
+
+125
+00:06:53.525 --> 00:06:56.105
+See if you can get this right.
+
+126
+00:06:56.105 --> 00:07:00.695
+We know that y has
+to be either 0 or 1,
+
+127
+00:07:00.695 --> 00:07:04.400
+so if y has a 70 percent
+chance of being 1,
+
+128
+00:07:04.400 --> 00:07:07.710
+what is the chance that it is 0?
+
+129
+00:07:07.730 --> 00:07:11.305
+So y has got to
+be either 0 or 1,
+
+130
+00:07:11.305 --> 00:07:13.670
+and thus the
+probability of it being
+
+131
+00:07:13.670 --> 00:07:16.400
+0 or 1 these two numbers
+
+132
+00:07:16.400 --> 00:07:20.095
+have to add up to one or
+to a 100 percent chance.
+
+133
+00:07:20.095 --> 00:07:22.940
+That's why if the
+chance of y being
+
+134
+00:07:22.940 --> 00:07:25.805
+1 is 0.7 or 70 percent chance,
+
+135
+00:07:25.805 --> 00:07:28.580
+then the chance of it
+being 0 has got to
+
+136
+00:07:28.580 --> 00:07:31.990
+be 0.3 or 30 percent chance.
+
+137
+00:07:31.990 --> 00:07:33.800
+If someday you read
+
+138
+00:07:33.800 --> 00:07:35.510
+research papers or blog pulls
+
+139
+00:07:35.510 --> 00:07:37.055
+of all logistic regression,
+
+140
+00:07:37.055 --> 00:07:40.220
+sometimes you see
+this notation that f
+
+141
+00:07:40.220 --> 00:07:43.190
+of x is equal to p of
+
+142
+00:07:43.190 --> 00:07:46.280
+y equals 1 given
+
+143
+00:07:46.280 --> 00:07:50.990
+the input features x and
+with parameters w and b.
+
+144
+00:07:50.990 --> 00:07:53.810
+What the semicolon
+here is used to
+
+145
+00:07:53.810 --> 00:07:56.900
+denote is just that w and b are
+
+146
+00:07:56.900 --> 00:08:00.800
+parameters that affect this
+computation of what is
+
+147
+00:08:00.800 --> 00:08:02.840
+the probability of
+y being equal to 1
+
+148
+00:08:02.840 --> 00:08:05.725
+given the input feature x?
+
+149
+00:08:05.725 --> 00:08:07.130
+For the purpose of this class,
+
+150
+00:08:07.130 --> 00:08:08.450
+don't worry too much about what
+
+151
+00:08:08.450 --> 00:08:11.810
+this vertical line and
+what the semicolon mean.
+
+152
+00:08:11.810 --> 00:08:14.120
+You don't need to remember or
+
+153
+00:08:14.120 --> 00:08:16.820
+follow any of this mathematical
+notation for this class.
+
+154
+00:08:16.820 --> 00:08:18.290
+I'm mentioning this only
+
+155
+00:08:18.290 --> 00:08:20.770
+because you may see
+this in other places.
+
+156
+00:08:20.770 --> 00:08:23.465
+In the optional lab that
+follows this video,
+
+157
+00:08:23.465 --> 00:08:24.980
+you also get to see how
+
+158
+00:08:24.980 --> 00:08:28.225
+the Sigmoid function is
+implemented in code.
+
+159
+00:08:28.225 --> 00:08:30.300
+You can see a plot that uses
+
+160
+00:08:30.300 --> 00:08:32.420
+the Sigmoid function so as to do
+
+161
+00:08:32.420 --> 00:08:34.550
+better on the
+classification tasks
+
+162
+00:08:34.550 --> 00:08:36.820
+that you saw in the
+previous optional lab.
+
+163
+00:08:36.820 --> 00:08:39.350
+Remember that the code
+will be provided to you,
+
+164
+00:08:39.350 --> 00:08:41.345
+so you just have to run it.
+
+165
+00:08:41.345 --> 00:08:45.185
+I hope you take a look and
+get familiar with the code.
+
+166
+00:08:45.185 --> 00:08:47.615
+Congrats on getting here.
+
+167
+00:08:47.615 --> 00:08:51.534
+You now know what is the
+logistic regression model
+
+168
+00:08:51.534 --> 00:08:53.530
+as well as the
+mathematical formula
+
+169
+00:08:53.530 --> 00:08:55.945
+that defines
+logistic regression.
+
+170
+00:08:55.945 --> 00:08:57.505
+For a long time,
+
+171
+00:08:57.505 --> 00:09:00.670
+a lot of Internet advertising
+was actually driven
+
+172
+00:09:00.670 --> 00:09:04.390
+by basically a slight variation
+of logistic regression.
+
+173
+00:09:04.390 --> 00:09:07.160
+This was very lucrative
+for some large companies,
+
+174
+00:09:07.160 --> 00:09:08.560
+and this is basically
+the algorithm
+
+175
+00:09:08.560 --> 00:09:10.000
+that decided what ad was
+
+176
+00:09:10.000 --> 00:09:13.604
+shown to you and many others
+on some large websites.
+
+177
+00:09:13.604 --> 00:09:15.480
+Now, there's, even more,
+
+178
+00:09:15.480 --> 00:09:17.155
+to learn about this algorithm.
+
+179
+00:09:17.155 --> 00:09:18.580
+In the next video,
+
+180
+00:09:18.580 --> 00:09:22.180
+we'll take a look at the
+details of logistic regression.
+
+181
+00:09:22.180 --> 00:09:24.850
+We'll look at some
+visualizations and also
+
+182
+00:09:24.850 --> 00:09:28.280
+examines something called
+the decision boundary.
+
+183
+00:09:28.280 --> 00:09:30.650
+This will give you a
+few different ways to
+
+184
+00:09:30.650 --> 00:09:33.515
+map the numbers that
+this model outputs,
+
+185
+00:09:33.515 --> 00:09:36.170
+such as 0.3, or 0.7,
+
+186
+00:09:36.170 --> 00:09:42.440
+or 0.65 to a prediction of
+whether y is actually 0 or 1.
+
+187
+00:09:42.440 --> 00:09:44.990
+Let's go on to the
+next video to learn
+
+188
+00:09:44.990 --> 00:09:48.300
+more about logistic regression.

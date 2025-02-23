@@ -1,0 +1,932 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.300
+In the last video,
+you learned about
+
+2
+00:00:03.300 --> 00:00:05.535
+the logistic regression model.
+
+3
+00:00:05.535 --> 00:00:09.360
+Now, let's take a look at
+the decision boundary to get
+
+4
+00:00:09.360 --> 00:00:10.620
+a better sense of how
+
+5
+00:00:10.620 --> 00:00:13.470
+logistic regression is
+computing these predictions.
+
+6
+00:00:13.470 --> 00:00:15.180
+To recap, here's how
+
+7
+00:00:15.180 --> 00:00:17.355
+the logistic regression models
+
+8
+00:00:17.355 --> 00:00:20.445
+outputs are computed
+in two steps.
+
+9
+00:00:20.445 --> 00:00:22.005
+In the first step,
+
+10
+00:00:22.005 --> 00:00:26.010
+you compute z as w.x plus b.
+
+11
+00:00:26.010 --> 00:00:31.155
+Then you apply the Sigmoid
+function g to this value z.
+
+12
+00:00:31.155 --> 00:00:34.915
+Here again, is the formula
+for the Sigmoid function.
+
+13
+00:00:34.915 --> 00:00:38.300
+Another way to write
+this is we can
+
+14
+00:00:38.300 --> 00:00:41.765
+say f of x is equal to g,
+
+15
+00:00:41.765 --> 00:00:43.070
+the Sigmoid function,
+
+16
+00:00:43.070 --> 00:00:44.765
+also called the
+logistic function,
+
+17
+00:00:44.765 --> 00:00:48.500
+applied to w.x plus b,
+
+18
+00:00:48.500 --> 00:00:50.220
+where this is of course,
+
+19
+00:00:50.220 --> 00:00:52.560
+the value of z.
+
+20
+00:00:52.560 --> 00:00:54.890
+If you take the definition of
+
+21
+00:00:54.890 --> 00:00:59.375
+the Sigmoid function and
+plug in the definition of z,
+
+22
+00:00:59.375 --> 00:01:01.445
+then you find that f of x is
+
+23
+00:01:01.445 --> 00:01:04.625
+equal to this formula over here,
+
+24
+00:01:04.625 --> 00:01:08.630
+1 over 1 plus e to
+the negative z,
+
+25
+00:01:08.630 --> 00:01:11.435
+where z is wx plus b.
+
+26
+00:01:11.435 --> 00:01:13.550
+You may remember we said in
+
+27
+00:01:13.550 --> 00:01:16.385
+the previous video that
+we interpret this as
+
+28
+00:01:16.385 --> 00:01:19.045
+the probability
+that y is equal to
+
+29
+00:01:19.045 --> 00:01:22.555
+1 given x and with
+parameters w and b.
+
+30
+00:01:22.555 --> 00:01:27.415
+This is going to be a number
+like maybe a 0.7 or 0.3.
+
+31
+00:01:27.415 --> 00:01:31.125
+Now, what if you want to learn
+the algorithm to predict.
+
+32
+00:01:31.125 --> 00:01:35.000
+Is the value of y going
+to be zero or one?
+
+33
+00:01:35.000 --> 00:01:37.940
+Well, one thing you
+might do is set
+
+34
+00:01:37.940 --> 00:01:41.660
+a threshold above which
+you predict y is one,
+
+35
+00:01:41.660 --> 00:01:44.480
+or you set y hat to
+prediction to be equal to
+
+36
+00:01:44.480 --> 00:01:47.890
+one and below which
+you might say y hat,
+
+37
+00:01:47.890 --> 00:01:51.625
+my prediction is going
+to be equal to zero.
+
+38
+00:01:51.625 --> 00:01:55.175
+A common choice would be
+to pick a threshold of
+
+39
+00:01:55.175 --> 00:02:00.680
+0.5 so that if f of x is
+greater than or equal to 0.5,
+
+40
+00:02:00.680 --> 00:02:02.875
+then predict y is one.
+
+41
+00:02:02.875 --> 00:02:06.375
+We write that prediction
+as y hat equals 1,
+
+42
+00:02:06.375 --> 00:02:09.260
+or if f of x is less than 0.5,
+
+43
+00:02:09.260 --> 00:02:10.940
+then predict y is 0,
+
+44
+00:02:10.940 --> 00:02:12.320
+or in other words,
+
+45
+00:02:12.320 --> 00:02:15.785
+the prediction y
+hat is equal to 0.
+
+46
+00:02:15.785 --> 00:02:17.960
+Now, let's dive deeper into when
+
+47
+00:02:17.960 --> 00:02:19.775
+the model would predict one.
+
+48
+00:02:19.775 --> 00:02:22.010
+In other words, when
+is f of x greater
+
+49
+00:02:22.010 --> 00:02:25.070
+than or equal to 0.5.
+
+50
+00:02:25.070 --> 00:02:30.550
+We'll recall that f of x
+is just equal to g of z.
+
+51
+00:02:30.550 --> 00:02:33.290
+So f is greater than or equal to
+
+52
+00:02:33.290 --> 00:02:38.425
+0.5 whenever g of z is
+greater than or equal to 0.5.
+
+53
+00:02:38.425 --> 00:02:43.150
+But when is g of z greater
+than or equal to 0.5?
+
+54
+00:02:43.150 --> 00:02:47.070
+Well, here's a Sigmoid
+function over here.
+
+55
+00:02:47.070 --> 00:02:50.960
+So g of z is greater
+than or equal to
+
+56
+00:02:50.960 --> 00:02:56.785
+0.5 whenever z is greater
+than or equal to 0.
+
+57
+00:02:56.785 --> 00:03:02.630
+That is whenever z is on the
+right half of this axis.
+
+58
+00:03:02.630 --> 00:03:06.560
+Finally, when is z greater
+than or equal to zero?
+
+59
+00:03:06.560 --> 00:03:11.530
+Well, z is equal to w.x plus b,
+
+60
+00:03:11.530 --> 00:03:14.970
+so z is greater than
+or equal to zero
+
+61
+00:03:14.970 --> 00:03:19.765
+whenever w.x plus b is greater
+than or equal to zero.
+
+62
+00:03:19.765 --> 00:03:22.940
+To recap, what you've seen
+
+63
+00:03:22.940 --> 00:03:25.550
+here is that the model predicts
+
+64
+00:03:25.550 --> 00:03:32.905
+1 whenever w.x plus b is
+greater than or equal to 0.
+
+65
+00:03:32.905 --> 00:03:38.910
+Conversely, when w.x plus
+b is less than zero,
+
+66
+00:03:38.910 --> 00:03:42.960
+the algorithm predicts y is 0.
+
+67
+00:03:42.960 --> 00:03:45.200
+Given this, let's now
+
+68
+00:03:45.200 --> 00:03:48.755
+visualize how the model
+makes predictions.
+
+69
+00:03:48.755 --> 00:03:51.275
+I'm going to take an example of
+
+70
+00:03:51.275 --> 00:03:55.235
+a classification problem
+where you have two features,
+
+71
+00:03:55.235 --> 00:03:58.615
+x1 and x2 instead of
+just one feature.
+
+72
+00:03:58.615 --> 00:04:03.050
+Here's a training set where
+the little red crosses denote
+
+73
+00:04:03.050 --> 00:04:05.000
+the positive examples and
+
+74
+00:04:05.000 --> 00:04:08.215
+the little blue circles
+denote negative examples.
+
+75
+00:04:08.215 --> 00:04:13.550
+The red crosses
+corresponds to y equals 1,
+
+76
+00:04:13.550 --> 00:04:18.640
+and the blue circles
+correspond to y equals 0.
+
+77
+00:04:18.640 --> 00:04:22.490
+The logistic regression model
+will make predictions using
+
+78
+00:04:22.490 --> 00:04:26.315
+this function f of
+x equals g of z,
+
+79
+00:04:26.315 --> 00:04:30.350
+where z is now this
+expression over here,
+
+80
+00:04:30.350 --> 00:04:34.370
+w1x1 plus w2x2 plus b,
+
+81
+00:04:34.370 --> 00:04:37.885
+because we have two
+features x1 and x2.
+
+82
+00:04:37.885 --> 00:04:41.870
+Let's just say for
+this example that
+
+83
+00:04:41.870 --> 00:04:45.650
+the value of the parameters
+are w1 equals 1,
+
+84
+00:04:45.650 --> 00:04:50.585
+w2 equals 1, and b
+equals negative 3.
+
+85
+00:04:50.585 --> 00:04:52.565
+Let's now take a look at how
+
+86
+00:04:52.565 --> 00:04:55.385
+logistic regression
+makes predictions.
+
+87
+00:04:55.385 --> 00:04:57.590
+In particular, let's
+figure out when
+
+88
+00:04:57.590 --> 00:04:59.630
+wx plus b is greater
+than equal to
+
+89
+00:04:59.630 --> 00:05:04.105
+0 and when wx plus
+b is less than 0.
+
+90
+00:05:04.105 --> 00:05:05.895
+To figure that out,
+
+91
+00:05:05.895 --> 00:05:08.225
+there's a very interesting
+line to look at,
+
+92
+00:05:08.225 --> 00:05:13.400
+which is when wx plus b
+is exactly equal to 0.
+
+93
+00:05:13.400 --> 00:05:18.375
+It turns out that this
+line is also called
+
+94
+00:05:18.375 --> 00:05:21.970
+the decision boundary because
+that's the line where
+
+95
+00:05:21.970 --> 00:05:24.215
+you're just almost neutral about
+
+96
+00:05:24.215 --> 00:05:26.845
+whether y is 0 or y is 1.
+
+97
+00:05:26.845 --> 00:05:31.535
+Now, for the values of
+the parameters w_1, w_2,
+
+98
+00:05:31.535 --> 00:05:35.300
+and b that we had
+written down above,
+
+99
+00:05:35.300 --> 00:05:43.210
+this decision boundary is
+just x_1 plus x_2 minus 3.
+
+100
+00:05:43.210 --> 00:05:49.170
+When is x_1 plus x_2
+minus 3 equal to 0?
+
+101
+00:05:49.170 --> 00:05:52.060
+Well, that will
+correspond to the line
+
+102
+00:05:52.060 --> 00:05:55.885
+x_1 plus x_2 equals 3,
+
+103
+00:05:55.885 --> 00:06:00.940
+and that is this line
+shown over here.
+
+104
+00:06:01.250 --> 00:06:06.250
+This line turns out to be
+the decision boundary,
+
+105
+00:06:06.250 --> 00:06:10.510
+where if the features x are
+to the right of this line,
+
+106
+00:06:10.510 --> 00:06:12.370
+logistic regression
+would predict
+
+107
+00:06:12.370 --> 00:06:15.320
+1 and to the left of this line,
+
+108
+00:06:15.320 --> 00:06:18.815
+logistic regression
+with predicts 0.
+
+109
+00:06:18.815 --> 00:06:23.750
+In other words, what we
+have just visualize is
+
+110
+00:06:23.750 --> 00:06:25.380
+the decision boundary for
+
+111
+00:06:25.380 --> 00:06:28.825
+logistic regression when
+the parameters w_1,
+
+112
+00:06:28.825 --> 00:06:32.460
+w_2, and b are 1,1
+and negative 3.
+
+113
+00:06:32.460 --> 00:06:33.835
+Of course, if you had
+
+114
+00:06:33.835 --> 00:06:35.885
+a different choice
+of the parameters,
+
+115
+00:06:35.885 --> 00:06:39.045
+the decision boundary
+would be a different line.
+
+116
+00:06:39.045 --> 00:06:40.655
+Now let's look at
+
+117
+00:06:40.655 --> 00:06:42.670
+a more complex example where
+
+118
+00:06:42.670 --> 00:06:45.635
+the decision boundary is
+no longer a straight line.
+
+119
+00:06:45.635 --> 00:06:50.695
+As before, crosses denote
+the class y equals 1,
+
+120
+00:06:50.695 --> 00:06:56.780
+and the little circles
+denote the class y equals 0.
+
+121
+00:06:56.780 --> 00:07:00.010
+Earlier last week, you saw
+
+122
+00:07:00.010 --> 00:07:03.135
+how to use polynomials
+in linear regression,
+
+123
+00:07:03.135 --> 00:07:07.150
+and you can do the same
+in logistic regression.
+
+124
+00:07:07.250 --> 00:07:11.245
+This set z to be w_1,
+
+125
+00:07:11.245 --> 00:07:13.720
+x_1 squared plus w_2,
+
+126
+00:07:13.720 --> 00:07:16.525
+x_2 squared plus b.
+
+127
+00:07:16.525 --> 00:07:18.655
+With this choice of features,
+
+128
+00:07:18.655 --> 00:07:21.315
+polynomial features into
+a logistic regression.
+
+129
+00:07:21.315 --> 00:07:23.575
+F of x, which equals g of z,
+
+130
+00:07:23.575 --> 00:07:26.905
+is now g of this
+expression over here.
+
+131
+00:07:26.905 --> 00:07:30.909
+Let's say that we ended
+up choosing w_1 and w_2
+
+132
+00:07:30.909 --> 00:07:35.900
+to be 1 and b to be negative 1.
+
+133
+00:07:35.940 --> 00:07:39.760
+Z is equal to 1 times x_1
+
+134
+00:07:39.760 --> 00:07:43.400
+squared plus 1 times
+x_2 squared minus 1.
+
+135
+00:07:43.400 --> 00:07:46.000
+The decision
+boundary, as before,
+
+136
+00:07:46.000 --> 00:07:50.510
+will correspond to
+when z is equal to 0.
+
+137
+00:07:50.510 --> 00:07:53.530
+This expression
+will be equal to 0
+
+138
+00:07:53.530 --> 00:07:57.255
+when x_1 squared plus x_2
+squared is equal to 1.
+
+139
+00:07:57.255 --> 00:08:00.460
+If you plot on the
+diagram on the left,
+
+140
+00:08:00.460 --> 00:08:02.780
+the curve corresponding to
+
+141
+00:08:02.780 --> 00:08:05.465
+x_1 squared plus x_2
+squared equals 1,
+
+142
+00:08:05.465 --> 00:08:08.495
+this turns out to be the circle.
+
+143
+00:08:08.495 --> 00:08:10.805
+When x_1 squared plus x_2
+
+144
+00:08:10.805 --> 00:08:12.925
+squared is greater
+than or equal to 1,
+
+145
+00:08:12.925 --> 00:08:14.760
+that's this area outside
+
+146
+00:08:14.760 --> 00:08:19.050
+the circle and that's when
+you predict y to be 1.
+
+147
+00:08:19.050 --> 00:08:21.550
+Conversely, when x_1
+
+148
+00:08:21.550 --> 00:08:24.400
+squared plus x_2
+squared is less than 1,
+
+149
+00:08:24.400 --> 00:08:26.860
+that's this area inside
+
+150
+00:08:26.860 --> 00:08:31.505
+the circle and that's when
+you predict y to be 0.
+
+151
+00:08:31.505 --> 00:08:33.660
+Can we come up with even more
+
+152
+00:08:33.660 --> 00:08:36.305
+complex decision
+boundaries than these?
+
+153
+00:08:36.305 --> 00:08:39.160
+Yes, you can. You can do so by
+
+154
+00:08:39.160 --> 00:08:42.080
+having even higher-order
+polynomial terms.
+
+155
+00:08:42.080 --> 00:08:44.320
+Say z is w_1,
+
+156
+00:08:44.320 --> 00:08:45.760
+x_1 plus w_2,
+
+157
+00:08:45.760 --> 00:08:47.595
+x_2 plus w_3,
+
+158
+00:08:47.595 --> 00:08:49.935
+x_1 squared plus w_4,
+
+159
+00:08:49.935 --> 00:08:53.185
+x_1, x_2 plus w_5, x_2 squared.
+
+160
+00:08:53.185 --> 00:08:55.325
+Then it's possible you can get
+
+161
+00:08:55.325 --> 00:08:57.820
+even more complex
+decision boundaries.
+
+162
+00:08:57.820 --> 00:09:00.824
+The model can define
+decision boundaries,
+
+163
+00:09:00.824 --> 00:09:02.595
+such as this example,
+
+164
+00:09:02.595 --> 00:09:04.975
+an ellipse just like this,
+
+165
+00:09:04.975 --> 00:09:08.960
+or with a different
+choice of the parameters.
+
+166
+00:09:08.960 --> 00:09:12.119
+You can even get more
+complex decision boundaries,
+
+167
+00:09:12.119 --> 00:09:15.590
+which can look like functions
+that maybe looks like that.
+
+168
+00:09:15.590 --> 00:09:18.180
+So this is an example of
+
+169
+00:09:18.180 --> 00:09:20.520
+an even more complex
+decision boundary
+
+170
+00:09:20.520 --> 00:09:23.080
+than the ones we've
+seen previously.
+
+171
+00:09:23.080 --> 00:09:26.000
+This implementation of
+logistic regression
+
+172
+00:09:26.000 --> 00:09:28.570
+will predict y equals 1
+
+173
+00:09:28.570 --> 00:09:31.060
+inside this shape and
+
+174
+00:09:31.060 --> 00:09:34.430
+outside the shape will
+predict y equals 0.
+
+175
+00:09:34.430 --> 00:09:37.350
+With these polynomial features,
+
+176
+00:09:37.350 --> 00:09:40.295
+you can get very complex
+decision boundaries.
+
+177
+00:09:40.295 --> 00:09:42.520
+In other words, logistic
+regression can learn to
+
+178
+00:09:42.520 --> 00:09:45.270
+fit pretty complex data.
+
+179
+00:09:45.270 --> 00:09:47.585
+Although if you were to not
+
+180
+00:09:47.585 --> 00:09:50.125
+include any of these
+higher-order polynomials,
+
+181
+00:09:50.125 --> 00:09:52.850
+so if the only features
+you use are x_1,
+
+182
+00:09:52.850 --> 00:09:54.510
+x_2, x_3, and so on,
+
+183
+00:09:54.510 --> 00:09:56.375
+then the decision boundary for
+
+184
+00:09:56.375 --> 00:09:59.090
+logistic regression
+will always be linear,
+
+185
+00:09:59.090 --> 00:10:01.040
+will always be a straight line.
+
+186
+00:10:01.040 --> 00:10:03.285
+In the upcoming optional lab,
+
+187
+00:10:03.285 --> 00:10:04.900
+you also get to see
+
+188
+00:10:04.900 --> 00:10:08.525
+the code implementation
+of the decision boundary.
+
+189
+00:10:08.525 --> 00:10:10.085
+In the example in the lab,
+
+190
+00:10:10.085 --> 00:10:12.520
+there will be two
+features so you can see
+
+191
+00:10:12.520 --> 00:10:15.430
+that decision
+boundary as a line.
+
+192
+00:10:15.430 --> 00:10:17.240
+With this visualization,
+
+193
+00:10:17.240 --> 00:10:19.535
+I hope that you now have
+a sense of the range of
+
+194
+00:10:19.535 --> 00:10:23.360
+possible models you can get
+with logistic regression.
+
+195
+00:10:23.360 --> 00:10:25.350
+Now that you've seen what f of
+
+196
+00:10:25.350 --> 00:10:27.605
+x can potentially compute,
+
+197
+00:10:27.605 --> 00:10:29.615
+let's take a look at
+how you can actually
+
+198
+00:10:29.615 --> 00:10:32.300
+train a logistic
+regression model.
+
+199
+00:10:32.300 --> 00:10:33.670
+We'll start by looking at
+
+200
+00:10:33.670 --> 00:10:34.930
+the cost function for
+
+201
+00:10:34.930 --> 00:10:37.055
+logistic regression
+and after that,
+
+202
+00:10:37.055 --> 00:10:39.845
+figured out how to apply
+gradient descent to it.
+
+203
+00:10:39.845 --> 00:10:42.490
+Let's go on to the next video.

@@ -1,0 +1,639 @@
+WEBVTT
+
+1
+00:00:01.040 --> 00:00:05.145
+To fit the parameters of a
+logistic regression model,
+
+2
+00:00:05.145 --> 00:00:06.450
+we're going to try to find
+
+3
+00:00:06.450 --> 00:00:08.865
+the values of the
+parameters w and b
+
+4
+00:00:08.865 --> 00:00:12.870
+that minimize the cost
+function J of w and b,
+
+5
+00:00:12.870 --> 00:00:15.945
+and we'll again apply
+gradient descent to do this.
+
+6
+00:00:15.945 --> 00:00:18.000
+Let's take a look at how.
+
+7
+00:00:18.000 --> 00:00:21.165
+In this video we'll
+focus on how to find
+
+8
+00:00:21.165 --> 00:00:24.270
+a good choice of the
+parameters w and b.
+
+9
+00:00:24.270 --> 00:00:26.145
+After you've done so,
+
+10
+00:00:26.145 --> 00:00:29.115
+if you give the model
+a new input, x,
+
+11
+00:00:29.115 --> 00:00:31.140
+say a new patients at
+
+12
+00:00:31.140 --> 00:00:34.050
+the hospital with a certain
+tumor size and age,
+
+13
+00:00:34.050 --> 00:00:35.775
+then these are diagnosis.
+
+14
+00:00:35.775 --> 00:00:38.744
+The model can then
+make a prediction,
+
+15
+00:00:38.744 --> 00:00:41.070
+or it can try to estimate
+
+16
+00:00:41.070 --> 00:00:45.600
+the probability that
+the label y is one.
+
+17
+00:00:45.600 --> 00:00:48.290
+The average you can
+use to minimize
+
+18
+00:00:48.290 --> 00:00:50.875
+the cost function is
+gradient descent.
+
+19
+00:00:50.875 --> 00:00:54.270
+Here again is the cost function.
+
+20
+00:00:54.270 --> 00:00:56.195
+If you want to minimize
+
+21
+00:00:56.195 --> 00:00:59.855
+the cost j as a
+function of w and b,
+
+22
+00:00:59.855 --> 00:01:03.755
+well, here's the usual
+gradient descent algorithm,
+
+23
+00:01:03.755 --> 00:01:05.630
+where you repeatedly update
+
+24
+00:01:05.630 --> 00:01:09.545
+each parameter as the
+0 value minus Alpha,
+
+25
+00:01:09.545 --> 00:01:14.240
+the learning rate times
+this derivative term.
+
+26
+00:01:14.240 --> 00:01:17.045
+Let's take a look
+at the derivative
+
+27
+00:01:17.045 --> 00:01:19.595
+of j with respect to w_j.
+
+28
+00:01:19.595 --> 00:01:23.330
+This term up on top
+here, where as usual,
+
+29
+00:01:23.330 --> 00:01:25.490
+j goes from one through n,
+
+30
+00:01:25.490 --> 00:01:28.210
+where n is the
+number of features.
+
+31
+00:01:28.210 --> 00:01:31.565
+If someone were to apply
+the rules of calculus,
+
+32
+00:01:31.565 --> 00:01:35.930
+you can show that the derivative
+with respect to w_j of
+
+33
+00:01:35.930 --> 00:01:38.300
+the cost function capital J is
+
+34
+00:01:38.300 --> 00:01:41.150
+equal to this
+expression over here,
+
+35
+00:01:41.150 --> 00:01:44.210
+is 1 over m times the sum
+
+36
+00:01:44.210 --> 00:01:48.575
+from 1 through m of
+this error term.
+
+37
+00:01:48.575 --> 00:01:56.220
+That is f minus the
+label y times x_j.
+
+38
+00:01:56.220 --> 00:01:58.800
+Here are just x I j is
+
+39
+00:01:58.800 --> 00:02:02.520
+the j feature of
+training example i.
+
+40
+00:02:02.520 --> 00:02:05.690
+Now let's also look
+at the derivative of
+
+41
+00:02:05.690 --> 00:02:08.500
+j with respect to
+the parameter b.
+
+42
+00:02:08.500 --> 00:02:12.575
+It turns out to be this
+expression over here.
+
+43
+00:02:12.575 --> 00:02:15.125
+It's quite similar to
+the expression above,
+
+44
+00:02:15.125 --> 00:02:17.600
+except that it is
+not multiplied by
+
+45
+00:02:17.600 --> 00:02:22.105
+this x superscript i
+subscript j at the end.
+
+46
+00:02:22.105 --> 00:02:24.019
+Just as a reminder,
+
+47
+00:02:24.019 --> 00:02:26.435
+similar to what you saw
+for linear regression,
+
+48
+00:02:26.435 --> 00:02:28.400
+the way to carry out
+these updates is
+
+49
+00:02:28.400 --> 00:02:30.365
+to use simultaneous updates,
+
+50
+00:02:30.365 --> 00:02:32.150
+meaning that you first
+
+51
+00:02:32.150 --> 00:02:34.490
+compute the right-hand
+side for all of
+
+52
+00:02:34.490 --> 00:02:37.505
+these updates and
+then simultaneously
+
+53
+00:02:37.505 --> 00:02:41.970
+overwrite all the values on
+the left at the same time.
+
+54
+00:02:42.320 --> 00:02:45.890
+Let me take these
+derivative expressions
+
+55
+00:02:45.890 --> 00:02:50.435
+here and plug them
+into these terms here.
+
+56
+00:02:50.435 --> 00:02:56.425
+This gives you gradient descent
+for logistic regression.
+
+57
+00:02:56.425 --> 00:02:59.180
+Now, one funny
+thing you might be
+
+58
+00:02:59.180 --> 00:03:01.940
+wondering is, that's weird.
+
+59
+00:03:01.940 --> 00:03:03.590
+These two equations look
+
+60
+00:03:03.590 --> 00:03:05.870
+exactly like the
+average we had come up
+
+61
+00:03:05.870 --> 00:03:08.155
+with previously for
+linear regression
+
+62
+00:03:08.155 --> 00:03:09.905
+so you might be wondering,
+
+63
+00:03:09.905 --> 00:03:11.570
+is linear regression actually
+
+64
+00:03:11.570 --> 00:03:14.260
+secretly the same as
+logistic regression?
+
+65
+00:03:14.260 --> 00:03:18.755
+Well, even though these
+equations look the same,
+
+66
+00:03:18.755 --> 00:03:22.040
+the reason that this is not
+linear regression is because
+
+67
+00:03:22.040 --> 00:03:26.390
+the definition for the
+function f of x has changed.
+
+68
+00:03:26.390 --> 00:03:28.155
+In linear regression,
+
+69
+00:03:28.155 --> 00:03:29.400
+f of x is,
+
+70
+00:03:29.400 --> 00:03:31.620
+this is wx plus b.
+
+71
+00:03:31.620 --> 00:03:33.590
+But in logistic regression,
+
+72
+00:03:33.590 --> 00:03:35.300
+f of x is defined to be
+
+73
+00:03:35.300 --> 00:03:39.745
+the sigmoid function
+applied to wx plus b.
+
+74
+00:03:39.745 --> 00:03:42.830
+Although the algorithm
+written looked the
+
+75
+00:03:42.830 --> 00:03:46.399
+same for both linear regression
+and logistic regression,
+
+76
+00:03:46.399 --> 00:03:49.070
+actually they're two very
+different algorithms
+
+77
+00:03:49.070 --> 00:03:52.985
+because the definition for
+f of x is not the same.
+
+78
+00:03:52.985 --> 00:03:55.400
+When we talked about
+gradient descent
+
+79
+00:03:55.400 --> 00:03:57.890
+for linear regression
+previously,
+
+80
+00:03:57.890 --> 00:03:59.900
+you saw how you can monitor
+
+81
+00:03:59.900 --> 00:04:02.870
+a gradient descent to
+make sure it converges.
+
+82
+00:04:02.870 --> 00:04:05.750
+You can just apply
+the same method for
+
+83
+00:04:05.750 --> 00:04:09.655
+logistic regression to make
+sure it also converges.
+
+84
+00:04:09.655 --> 00:04:13.700
+I've written out these
+updates as if you're updating
+
+85
+00:04:13.700 --> 00:04:18.990
+the parameters w_j one
+parameter at a time.
+
+86
+00:04:19.310 --> 00:04:23.000
+Similar to the discussion
+
+87
+00:04:23.000 --> 00:04:26.555
+on vectorized implementations
+of linear regression,
+
+88
+00:04:26.555 --> 00:04:29.540
+you can also use
+vectorization to make
+
+89
+00:04:29.540 --> 00:04:33.310
+gradient descent run faster
+for logistic regression.
+
+90
+00:04:33.310 --> 00:04:35.390
+I won't dive into the details of
+
+91
+00:04:35.390 --> 00:04:37.955
+the vectorized implementation
+in this video.
+
+92
+00:04:37.955 --> 00:04:40.130
+But you can also learn
+more about it and
+
+93
+00:04:40.130 --> 00:04:42.620
+see the code in
+the optional labs.
+
+94
+00:04:42.620 --> 00:04:45.200
+Now you know how to implement
+
+95
+00:04:45.200 --> 00:04:48.220
+gradient descent for
+logistic regression.
+
+96
+00:04:48.220 --> 00:04:50.840
+You might also remember feature
+
+97
+00:04:50.840 --> 00:04:54.170
+scaling when we were
+using linear regression.
+
+98
+00:04:54.170 --> 00:04:56.524
+Where you saw how
+feature scaling,
+
+99
+00:04:56.524 --> 00:04:58.160
+that is scaling all
+the features to
+
+100
+00:04:58.160 --> 00:04:59.960
+take on similar
+ranges of values,
+
+101
+00:04:59.960 --> 00:05:02.345
+say between negative
+1 and plus 1,
+
+102
+00:05:02.345 --> 00:05:06.095
+how they can help gradient
+descent to converge faster.
+
+103
+00:05:06.095 --> 00:05:08.675
+Feature scaling
+applied the same way
+
+104
+00:05:08.675 --> 00:05:10.610
+to scale the different
+features to take on
+
+105
+00:05:10.610 --> 00:05:12.860
+similar ranges of
+values can also speed
+
+106
+00:05:12.860 --> 00:05:15.875
+up gradient descent for
+logistic regression.
+
+107
+00:05:15.875 --> 00:05:18.395
+In the upcoming optional lab,
+
+108
+00:05:18.395 --> 00:05:21.370
+you also see how the gradient
+
+109
+00:05:21.370 --> 00:05:25.655
+for the logistic regression
+can be calculated in code.
+
+110
+00:05:25.655 --> 00:05:28.390
+This will be useful to
+look at because you
+
+111
+00:05:28.390 --> 00:05:29.620
+also implement this in
+
+112
+00:05:29.620 --> 00:05:32.245
+the practice lab at
+the end of this week.
+
+113
+00:05:32.245 --> 00:05:35.395
+After you run gradient
+descent in this lab,
+
+114
+00:05:35.395 --> 00:05:36.730
+there'll be a nice set of
+
+115
+00:05:36.730 --> 00:05:40.010
+animated plots that show
+gradient descent in action.
+
+116
+00:05:40.010 --> 00:05:41.920
+You see the sigmoid function,
+
+117
+00:05:41.920 --> 00:05:44.245
+the contour plot of the cost,
+
+118
+00:05:44.245 --> 00:05:46.540
+the 3D surface plot of the cost,
+
+119
+00:05:46.540 --> 00:05:47.710
+and the learning curve or
+
+120
+00:05:47.710 --> 00:05:50.395
+evolve as gradient descent runs.
+
+121
+00:05:50.395 --> 00:05:53.200
+There will be another
+optional lab after that,
+
+122
+00:05:53.200 --> 00:05:54.430
+which is short and sweet,
+
+123
+00:05:54.430 --> 00:05:55.930
+but also very useful
+
+124
+00:05:55.930 --> 00:05:57.730
+because they're
+showing you how to use
+
+125
+00:05:57.730 --> 00:06:00.740
+the popular
+scikit-learn library to
+
+126
+00:06:00.740 --> 00:06:04.430
+train the logistic regression
+model for classification.
+
+127
+00:06:04.430 --> 00:06:07.460
+Many machine learning
+practitioners in
+
+128
+00:06:07.460 --> 00:06:08.840
+many companies today use
+
+129
+00:06:08.840 --> 00:06:11.660
+scikit-learn regularly
+as part of their job.
+
+130
+00:06:11.660 --> 00:06:13.880
+I hope you check out
+the scikit-learn
+
+131
+00:06:13.880 --> 00:06:15.155
+function as well and
+
+132
+00:06:15.155 --> 00:06:18.845
+take a look at how that
+is used. That's it.
+
+133
+00:06:18.845 --> 00:06:22.250
+You should now know how to
+implement logistic regression.
+
+134
+00:06:22.250 --> 00:06:24.200
+This is a very powerful and very
+
+135
+00:06:24.200 --> 00:06:26.375
+widely used learning algorithm
+
+136
+00:06:26.375 --> 00:06:27.890
+and you now know how to get it
+
+137
+00:06:27.890 --> 00:06:31.020
+to work yourself.
+Congratulations.

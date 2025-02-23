@@ -1,0 +1,571 @@
+WEBVTT
+
+1
+00:00:00.710 --> 00:00:03.330
+In this video, you see how to
+
+2
+00:00:03.330 --> 00:00:05.970
+implement regularized
+logistic regression.
+
+3
+00:00:05.970 --> 00:00:09.450
+Just as the gradient update
+for logistic regression has
+
+4
+00:00:09.450 --> 00:00:11.250
+seemed surprisingly similar to
+
+5
+00:00:11.250 --> 00:00:13.455
+the gradient update
+for linear regression,
+
+6
+00:00:13.455 --> 00:00:15.540
+you find that the
+gradient descent update
+
+7
+00:00:15.540 --> 00:00:17.370
+for regularized logistic
+regression will
+
+8
+00:00:17.370 --> 00:00:18.960
+also look similar to
+
+9
+00:00:18.960 --> 00:00:21.375
+the update for regularized
+linear regression.
+
+10
+00:00:21.375 --> 00:00:23.940
+Let's take a look.
+Here is the idea.
+
+11
+00:00:23.940 --> 00:00:25.290
+We saw earlier that
+
+12
+00:00:25.290 --> 00:00:27.920
+logistic regression can
+be prone to overfitting
+
+13
+00:00:27.920 --> 00:00:29.810
+if you fit it with
+very high order
+
+14
+00:00:29.810 --> 00:00:32.345
+polynomial features like this.
+
+15
+00:00:32.345 --> 00:00:37.400
+Here, z is a high order
+polynomial that gets passed into
+
+16
+00:00:37.400 --> 00:00:42.950
+the sigmoid function like so
+to compute f. In particular,
+
+17
+00:00:42.950 --> 00:00:45.620
+you can end up with a
+decision boundary that is
+
+18
+00:00:45.620 --> 00:00:49.345
+overly complex and
+overfits as training set.
+
+19
+00:00:49.345 --> 00:00:52.100
+More generally, when you train
+
+20
+00:00:52.100 --> 00:00:54.680
+logistic regression
+with a lot of features,
+
+21
+00:00:54.680 --> 00:00:58.505
+whether polynomial features
+or some other features,
+
+22
+00:00:58.505 --> 00:01:01.480
+there could be a higher
+risk of overfitting.
+
+23
+00:01:01.480 --> 00:01:05.270
+This was the cost function
+for logistic regression.
+
+24
+00:01:05.270 --> 00:01:09.095
+If you want to modify it
+to use regularization,
+
+25
+00:01:09.095 --> 00:01:13.355
+all you need to do is add
+to it the following term.
+
+26
+00:01:13.355 --> 00:01:16.640
+Let's add lambda to
+regularization parameter over
+
+27
+00:01:16.640 --> 00:01:21.635
+2m times the sum from
+j equals 1 through n,
+
+28
+00:01:21.635 --> 00:01:26.275
+where n is the number of
+features as usual of wj squared.
+
+29
+00:01:26.275 --> 00:01:28.910
+When you minimize
+this cost function
+
+30
+00:01:28.910 --> 00:01:30.870
+as a function of w and b,
+
+31
+00:01:30.870 --> 00:01:34.280
+it has the effect of
+penalizing parameters w_1,
+
+32
+00:01:34.280 --> 00:01:36.185
+w_2 through w_n,
+
+33
+00:01:36.185 --> 00:01:39.160
+and preventing them
+from being too large.
+
+34
+00:01:39.160 --> 00:01:42.380
+If you do this, then even
+though you're fitting
+
+35
+00:01:42.380 --> 00:01:45.380
+a high order polynomial
+with a lot of parameters,
+
+36
+00:01:45.380 --> 00:01:49.255
+you still get a decision
+boundary that looks like this.
+
+37
+00:01:49.255 --> 00:01:51.395
+Something that looks
+more reasonable
+
+38
+00:01:51.395 --> 00:01:54.200
+for separating positive
+and negative examples
+
+39
+00:01:54.200 --> 00:01:56.540
+while also
+generalizing hopefully
+
+40
+00:01:56.540 --> 00:01:59.890
+to new examples not
+in the training set.
+
+41
+00:01:59.890 --> 00:02:02.390
+When using regularization,
+
+42
+00:02:02.390 --> 00:02:04.310
+even when you have
+a lot of features.
+
+43
+00:02:04.310 --> 00:02:07.145
+How can you actually
+implement this?
+
+44
+00:02:07.145 --> 00:02:09.830
+How can you actually minimize
+this cost function j of
+
+45
+00:02:09.830 --> 00:02:13.280
+wb that includes the
+regularization term?
+
+46
+00:02:13.280 --> 00:02:17.545
+Well, let's use gradient
+descent as before.
+
+47
+00:02:17.545 --> 00:02:21.255
+Here's a cost function
+that you want to minimize.
+
+48
+00:02:21.255 --> 00:02:24.260
+To implement gradient
+descent, as before,
+
+49
+00:02:24.260 --> 00:02:27.380
+we'll carry out the following
+simultaneous updates
+
+50
+00:02:27.380 --> 00:02:30.820
+over wj and b.
+
+51
+00:02:30.820 --> 00:02:34.795
+These are the usual update
+rules for gradient descent.
+
+52
+00:02:34.795 --> 00:02:37.955
+Just like regularized
+linear regression,
+
+53
+00:02:37.955 --> 00:02:41.285
+when you compute where there
+are these derivative terms,
+
+54
+00:02:41.285 --> 00:02:44.000
+the only thing that
+changes now is that
+
+55
+00:02:44.000 --> 00:02:49.115
+the derivative respect to wj
+gets this additional term,
+
+56
+00:02:49.115 --> 00:02:54.315
+lambda over m times wj
+added here at the end.
+
+57
+00:02:54.315 --> 00:02:56.990
+Again, it looks a lot like
+
+58
+00:02:56.990 --> 00:02:59.500
+the update for regularized
+linear regression.
+
+59
+00:02:59.500 --> 00:03:02.035
+In fact is the exact
+same equation,
+
+60
+00:03:02.035 --> 00:03:04.535
+except for the fact
+that the definition of
+
+61
+00:03:04.535 --> 00:03:07.460
+f is now no longer
+the linear function,
+
+62
+00:03:07.460 --> 00:03:11.365
+it is the logistic
+function applied to z.
+
+63
+00:03:11.365 --> 00:03:13.850
+Similar to linear regression,
+
+64
+00:03:13.850 --> 00:03:16.910
+we will regularize only
+the parameters w, j,
+
+65
+00:03:16.910 --> 00:03:19.100
+but not the parameter b,
+
+66
+00:03:19.100 --> 00:03:20.660
+which is why there's no change
+
+67
+00:03:20.660 --> 00:03:23.275
+the update you will make for b.
+
+68
+00:03:23.275 --> 00:03:26.570
+In the final optional lab of
+
+69
+00:03:26.570 --> 00:03:29.970
+this week, you
+revisit overfitting.
+
+70
+00:03:29.970 --> 00:03:33.665
+In the interactive plot
+in the optional lab,
+
+71
+00:03:33.665 --> 00:03:36.455
+you can now choose to
+regularize your models,
+
+72
+00:03:36.455 --> 00:03:38.705
+both regression and
+classification,
+
+73
+00:03:38.705 --> 00:03:41.120
+by enabling
+regularization during
+
+74
+00:03:41.120 --> 00:03:44.820
+gradient descent by selecting
+a value for lambda.
+
+75
+00:03:44.820 --> 00:03:46.925
+Please take a look
+at the code for
+
+76
+00:03:46.925 --> 00:03:48.260
+implementing regularized
+
+77
+00:03:48.260 --> 00:03:50.045
+logistic regression
+in particular,
+
+78
+00:03:50.045 --> 00:03:51.680
+because you'll implement this in
+
+79
+00:03:51.680 --> 00:03:55.260
+practice lab yourself at
+the end of this week.
+
+80
+00:03:55.940 --> 00:03:58.450
+Now you know how to implement
+
+81
+00:03:58.450 --> 00:04:00.770
+regularized logistic regression.
+
+82
+00:04:00.770 --> 00:04:03.110
+When I walk around
+Silicon Valley,
+
+83
+00:04:03.110 --> 00:04:04.930
+there are many
+engineers using machine
+
+84
+00:04:04.930 --> 00:04:06.790
+learning to create
+a ton of value,
+
+85
+00:04:06.790 --> 00:04:09.490
+sometimes making a lot of
+money for the companies.
+
+86
+00:04:09.490 --> 00:04:11.680
+I know you've only been studying
+
+87
+00:04:11.680 --> 00:04:14.060
+this stuff for a few weeks but
+
+88
+00:04:14.060 --> 00:04:15.820
+if you understand and can
+
+89
+00:04:15.820 --> 00:04:18.655
+apply linear regression
+and logistic regression,
+
+90
+00:04:18.655 --> 00:04:20.740
+that's actually all
+you need to create
+
+91
+00:04:20.740 --> 00:04:23.400
+some very valuable applications.
+
+92
+00:04:23.400 --> 00:04:25.360
+While the specific
+learning outcomes
+
+93
+00:04:25.360 --> 00:04:26.935
+you use are important,
+
+94
+00:04:26.935 --> 00:04:29.860
+knowing things like
+when and how to reduce
+
+95
+00:04:29.860 --> 00:04:31.780
+overfitting turns
+out to be one of
+
+96
+00:04:31.780 --> 00:04:34.805
+the very valuable skills
+in the real world as well.
+
+97
+00:04:34.805 --> 00:04:37.300
+I want to say congratulations
+
+98
+00:04:37.300 --> 00:04:39.490
+on how far you've
+come and I want
+
+99
+00:04:39.490 --> 00:04:41.285
+to say great job
+for getting through
+
+100
+00:04:41.285 --> 00:04:44.120
+all the way to the
+end of this video.
+
+101
+00:04:44.120 --> 00:04:46.115
+I hope you also work through
+
+102
+00:04:46.115 --> 00:04:48.470
+the practice labs and quizzes.
+
+103
+00:04:48.470 --> 00:04:50.600
+Having said that,
+there are still
+
+104
+00:04:50.600 --> 00:04:53.120
+many more exciting
+things to learn.
+
+105
+00:04:53.120 --> 00:04:55.910
+In the second course of
+this specialization,
+
+106
+00:04:55.910 --> 00:04:57.769
+you'll learn about
+neural networks,
+
+107
+00:04:57.769 --> 00:05:00.515
+also called deep
+learning algorithms.
+
+108
+00:05:00.515 --> 00:05:02.570
+Neural networks are
+responsible for
+
+109
+00:05:02.570 --> 00:05:04.870
+many of the latest
+breakthroughs in the eye today,
+
+110
+00:05:04.870 --> 00:05:07.789
+from practical speech
+recognition to computers
+
+111
+00:05:07.789 --> 00:05:09.500
+accurately recognizing
+objects and
+
+112
+00:05:09.500 --> 00:05:11.620
+images, to self-driving cars.
+
+113
+00:05:11.620 --> 00:05:13.970
+The way neural
+network gets built
+
+114
+00:05:13.970 --> 00:05:16.790
+actually uses a lot of what
+you've already learned,
+
+115
+00:05:16.790 --> 00:05:18.115
+like cost functions,
+
+116
+00:05:18.115 --> 00:05:20.830
+and gradient descent,
+and sigmoid functions.
+
+117
+00:05:20.830 --> 00:05:23.150
+Again, congratulations
+on reaching
+
+118
+00:05:23.150 --> 00:05:26.255
+the end of this third and
+final week of Course 1.
+
+119
+00:05:26.255 --> 00:05:29.090
+I hope you have [inaudible]
+and I will see you
+
+120
+00:05:29.090 --> 00:05:32.640
+in next week's material
+on neural networks.
